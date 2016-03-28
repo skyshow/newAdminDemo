@@ -1,0 +1,440 @@
+
+<extend name="template/template" />
+
+<block name="css">
+	<style type="text/css">
+		.h_hide{display:none;}
+	</style>
+</block>
+
+<block name="content">
+
+
+	
+
+	
+	
+	<div class="newsbox main-container">
+	    <div class="leftbox">
+	        <div class="imgnews">
+	            <img src="__PUBLIC__/images/xinwen.gif">
+	        </div>
+	        <div class="tabnews">
+	            <ul class="tab h_news_tab">
+	                <li key="zxzx" style="background-color:#2B80C4;">最新资讯</li>
+	                <li key="zhxx">综合信息</li>
+	                <li key="spxw">视频新闻</li>
+	                <li key="tpxw">图片新闻</li>
+	            </ul>
+	            <div class="tabcontent">
+	                <h3>国家卫生计生委副主任王培安就实</h3>
+	                <ul class="newsul zxzx">
+	                	<volist name="info.zxzx" id="vo">
+	                    	<li><a href="#"><span class="time">{$vo.addtime1}</span>{$vo.title}</a></li>
+	                	</volist>
+	                </ul>
+	                <ul class="newsul zhxx h_hide">
+	                	<volist name="info.zhxx" id="vo">
+	                    	<li><a href="#"><span class="time">{$vo.addtime1}</span>{$vo.title}</a></li>
+	                	</volist>
+	                </ul>
+	                <ul class="newsul spxw h_hide">
+	                	<volist name="info.spxw" id="vo">
+	                    	<li><a href="#"><span class="time">{$vo.addtime1}</span>{$vo.title}</a></li>
+	                	</volist>
+	                </ul>
+	                <ul class="newsul tpxw h_hide">
+	                	<volist name="info.tpxw" id="vo">
+	                    	<li><a href="#"><span class="time">{$vo.addtime1}</span>{$vo.title}</a></li>
+	                	</volist>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="rightbox">
+	        <div class="tonggao">
+	            <div class="title"><h3>通告公告</h3></div>
+	            <ul class="tinggaoul">
+		            <volist name="info.notice" id="vo">
+		                <li><a href="#">·{$vo.title}<span class="time">{$vo.addtime}</span></a></li>	              
+		            </volist>
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	
+	<div class="newsbox main-container">
+	    <div class="leftbox">
+	        <div class="bohead">
+	            <span class="header"></span>
+	            <ul class="catelist">
+	                <li><a href="#">卫生概况</a></li>
+	                <li><a href="#">政务新闻</a></li>
+	                <li><a href="#">工作动态</a></li>
+	                <li><a href="#">政策文件</a></li>
+	                <li><a href="#">疫情信息</a></li>
+	                <li><a href="#">依申请公开</a></li>
+	            </ul>
+	        </div>
+	        <div class="newscontent">
+	            <div class="newscontent-left">
+	                <img src="__PUBLIC__/images/lingdaonome.gif" class="newscontent-img">
+	                <volist name="info.leader" id="vo">
+	                    <div class="leaderitem">
+	                        <img src="__PUBLIC__/images/touxiang.gif">
+	                        <p class="leadername">{$vo.zjmc}</p>
+	                        <p>{$vo.zjzw}</p>
+	                        <p>{$vo.fgfw}</p>
+	                        <div class="clear"></div>
+	                    </div>    
+	                </volist>                   
+	            </div>
+	            <div class="newscontent-right">
+	                <div class="newscontent-box">
+	                    <img src="__PUBLIC__/images/huiyi.gif">
+	                    <ul class="newslist">
+		                    <volist name="info.xxgk" id="vo"> 
+		                    	<if condition="$key elt 3">                       
+		                        <li><a href="#"><span>[{$vo.addtime1}]</span>{$vo.title}</a></li>
+		                    	</if>
+		                    </volist>
+	                    </ul>
+	                </div>
+	                <div class="newscontent-box">
+	                    <img src="__PUBLIC__/images/huiyi.gif">
+	                    <ul class="newslist">
+	                       <volist name="info.xxgk" id="vo"> 
+	                       <if condition="($key lt 8) and ($key gt 3)">                       
+		                       <li><a href="#"><span>[{$vo.addtime1}]</span>{$vo.title}</a></li>
+		                   </if>
+		                   </volist>
+	                    </ul>
+	                </div>
+	                <div class="newscontent-box">
+	                    <img src="__PUBLIC__/images/huiyi.gif">
+	                    <ul class="newslist">
+	                       <volist name="info.xxgk" id="vo"> 
+	                       <if condition="($key lt 12) and ($key gt 7)">                        
+		                       <li><a href="#"><span>[{$vo.addtime1}]</span>{$vo.title}</a></li>
+		                   </if>
+		                   </volist>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="rightbox">
+	        <div class="zhengfumulu"><h3>政府信息公开目录</h3></div>
+	        <ul class="mululist">
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren1.gif">组织机构</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren2.gif">部门文件</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren3.gif">行政执法</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren4.gif">办事指南</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren5.gif">行政许可事项办事指南</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren6.gif">工作动态</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren7.gif">财政预决算</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren8.gif">政府信息公开工作年度报告</a></li>
+	            <li><a target="_blank" href="#"><img src="__PUBLIC__/images/lianxiren9.gif">其他</a></li>
+	        </ul>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	
+	<div class="main-container huiyuan">
+	    <a target="_blank" href="http://www.gdbs.gov.cn/portal/home.seam"><img src="__PUBLIC__/images/huiyuan.gif"></a>
+	</div>
+	
+	<div class="newsbox main-container">
+	    <div class="leftbox">
+	        <div class="bohead green">
+	            <span class="header"></span>
+	            <ul class="catelist">
+	                <li><a target="_blank" href="http://gdwst.gov.cn/wsbg/bsjn.php">办事指南</a></li>
+	                <li><a target="_blank" href="http://gdwst.gov.cn/wsbg/wssb.php">表格下载</a></li>
+	                <li><a target="_blank" href="http://xf.gdwst.gov.cn/">网上咨询</a></li>
+	                <li><a target="_blank" href="http://wsbs.gdwst.gov.cn/netapp/">网上申请</a></li>
+	                <li><a target="_blank" href="http://gdwst.gov.cn/wsbg/spzt.php">网上查询</a></li>
+	                <li><a target="_blank" href="http://gdwst.gov.cn/wsbg/spgg.php">审批公告</a></li>
+	            </ul>
+	        </div>
+	        <div class="newscontent">
+	            <div class="newscontent-left">
+	                <img src="__PUBLIC__/images/banshi.gif" class="newscontent-img">
+	                <div class="banshilist">
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian1.gif">政府信息公开指南</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian2.gif">政府信息公开目录</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian3.gif">政府信息公开工作年度报告</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian4.gif">政府信息依申请公开</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian5.gif">政府信息公开意见箱</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian6.gif">政府信息公开制度文件</a>
+	                </div>
+	            </div>
+	            <div class="newscontent-right">
+	                <div class="datingbox">
+	                    <div class="datingbtns">
+	                        <a target="_blank" href="http://gdwst.gov.cn/wsbg/bsjn.php"><img src="__PUBLIC__/images/banshu1.gif"></a>
+	                        <a target="_blank" href="http://gdwst.gov.cn/wsbg/wssb.php"><img src="__PUBLIC__/images/banshu2.gif"></a>
+	                        <a target="_blank" href="http://xf.gdwst.gov.cn/"><img src="__PUBLIC__/images/banshu3.gif"></a>
+	                        <a target="_blank" href="http://wsbs.gdwst.gov.cn/netapp/"><img src="__PUBLIC__/images/banshu4.gif"></a>
+	                        <a target="_blank" href="http://gdwst.gov.cn/wsbg/spzt.php"><img src="__PUBLIC__/images/banshu5.gif"></a>
+	                        <a target="_blank" href="http://gdwst.gov.cn/wsbg/spgg.php"><img src="__PUBLIC__/images/banshu6.gif"></a>
+	                    </div>
+	                    <div class="datinggroup">
+	                        <a target="_blank" href="http://wsbs.gdwst.gov.cn/wzgs/xkzny.jsp"><img src="__PUBLIC__/images/chasun.gif"></a>
+	                        <a target="_blank" href="http://gdwst.gov.cn/wsbg/spgg.php"><img src="__PUBLIC__/images/chasun2.gif"></a>
+	                    </div>
+	                </div>
+	                <div class="datingstatus">
+	                    <div class="shenpi">
+	                        <a href="#">审批公告</a>
+	                        <a href="#">审批状态查询</a>
+	                    </div>
+	                    <div class="chacha">
+	                        <input type="text" class="banjieshixiang" placeholder="已办结事项">
+	                        <select class="xukezhengl">
+	                            <option>许可证号</option>
+	                            <option>单位名称</option>
+	                        </select>
+	                        <a target="_blank" href="http://wsbs.gdwst.gov.cn/wzgs/xkzny.jsp">
+	                        <input type="submit" class="tijiaochaxun" value="查询">
+	                        </a>
+	                    </div>
+	                </div>
+	                
+	            </div>
+	        </div>
+	    </div>
+	    <div class="rightbox">
+	        <div class="zhengfumulu green"><h3>网上办事：</h3><span class="current">个人办事</span> | <span>企业办事</span></div>
+	        <div class="banshiddlist">
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu.gif"><span><br>生育收养</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu2.gif"><span><br>户籍</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu3.gif"><span><br>教育</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu.gif"><span><br>生育收养</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu2.gif"><span><br>户籍</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu3.gif"><span><br>教育</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu.gif"><span><br>生育收养</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu2.gif"><span><br>户籍</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu3.gif"><span><br>教育</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu.gif"><span><br>生育收养</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu2.gif"><span><br>户籍</span></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiaoyu3.gif"><span><br>教育</span></a>
+	        </div>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	
+	<div class="newsbox main-container">
+	    <div class="leftbox">
+	        <div class="bohead blue">
+	            <span class="header"></span>
+	            <ul class="catelist">
+	                <li><a href="#">公共意见</a></li>
+	                <li><a href="#">领导信箱</a></li>
+	                <li><a href="#">公告论坛</a></li>
+	                <li><a href="#">常见问题</a></li>
+	                <li><a href="#">在线访谈</a></li>
+	                <li><a href="#">政策解读</a></li>
+	                <li><a href="#">网上监督</a></li>
+	            </ul>
+	        </div>
+	        <div class="newscontent">
+	            <div class="newscontent-left">
+	                <img src="__PUBLIC__/images/fantan.gif" class="newscontent-img">
+	                <div class="banshilist blue">
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian1.gif">政府工作话你知微访谈</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian2.gif">政府信息公开目录</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian3.gif">政府信息公开工作年度报告</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian4.gif">政府信息依申请公开</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian5.gif">政府信息公开意见箱</a>
+	                    <a href="#" class="banshiitem"><img src="__PUBLIC__/images/wenjian6.gif">政府信息公开制度文件</a>
+	                </div>
+	            </div>
+	            <div class="newscontent-right">
+	                <table class="xinfangtable">
+	                    <tr>
+	                        <td>编号</td><td>标题</td><td>提交人</td><td>办结时间</td>
+	                    </tr>
+	                    <tr>
+	                        <td>20150505</td>
+	                        <td><a href="#">广东什么时候落实生二胎？</a></td>
+	                        <td>何*</td>
+	                        <td>2015-11-26</td>
+	                    </tr>
+	                    <tr>
+	                        <td>20150505</td>
+	                        <td><a href="#">广东什么时候落实生二胎？</a></td>
+	                        <td>何*</td>
+	                        <td>2015-11-26</td>
+	                    </tr>
+	                    <tr>
+	                        <td>20150505</td>
+	                        <td><a href="#">广东什么时候落实生二胎？</a></td>
+	                        <td>何*</td>
+	                        <td>2015-11-26</td>
+	                    </tr>
+	                    <tr>
+	                        <td>20150505</td>
+	                        <td><a href="#">广东什么时候落实生二胎？</a></td>
+	                        <td>何*</td>
+	                        <td>2015-11-26</td>
+	                    </tr>
+	                    <tr>
+	                        <td>20150505</td>
+	                        <td><a href="#">广东什么时候落实生二胎？</a></td>
+	                        <td>何*</td>
+	                        <td>2015-11-26</td>
+	                    </tr>
+	                </table>
+	                
+	                <a href="#" class="zixinmore"><img src="__PUBLIC__/images/chasun2.gif"></a>
+	                <div class="zixunbox">
+	                    <a class="zixunitem" href="#">
+	                        <img src="__PUBLIC__/images/zisun2.gif">
+	                        <div class="zixnkuao">
+	                            <h3>我要咨询</h3>
+	                            <span>办事过程中有不清楚？请点击咨询</span>
+	                        </div>
+	                    </a>
+	                    <a class="zixunitem" href="#">
+	                        <img src="__PUBLIC__/images/xyu.gif">
+	                         <div class="zixnkuao">
+	                            <h3>我要写信</h3>
+	                            <span>欢迎办事后对我们的服务进行打分</span>
+	                        </div>
+	                    </a>
+	                    <a class="zixunitem" href="#">
+	                        <img src="__PUBLIC__/images/youjian.gif">
+	                         <div class="zixnkuao">
+	                            <h3>领导邮箱</h3>
+	                            <span>您可根据指引向相关部门投诉</span>
+	                        </div>
+	                    </a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="rightbox">
+	        <div class="zhengfumulu blue"><h3>网上办事：</h3></div>
+	        <div class="xinfangimglist">
+	            <a href="#"><img src="__PUBLIC__/images/bianming1.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/bianming2.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/bianming3.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/bianming4.gif"></a>
+	        </div>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	
+	<div class="main-container huiyuan">
+	    <a href="#"><img src="__PUBLIC__/images/zhuanti.gif"></a>
+	</div>
+	
+	<div class="newsbox main-container">
+	    <div class="leftbox">
+	        <div class="bohead red">
+	            <span class="header"></span>
+	            <ul class="catelist">
+	                <li><a href="#">妇幼健康</a></li>
+	                <li><a href="#">食品监测</a></li>
+	                <li><a href="#">计划生育家庭发展</a></li>
+	                <li><a href="#">流动人口计划生育服务管理</a></li>
+	            </ul>
+	        </div>
+	        <div class="newscontent">
+	            <div class="newscontent-left">
+	                <img src="__PUBLIC__/images/bianmingtu.gif" class="newscontent-img">
+	                <div class="banshilist red">
+	                    <a href="#" class="banshiitem">政府工作话你知微访谈</a>
+	                    <a href="#" class="banshiitem">政府信息公开目录</a>
+	                    <a href="#" class="banshiitem">政府信息公开工作年度报告</a>
+	                    <a href="#" class="banshiitem">政府信息依申请公开</a>
+	                    <a href="#" class="banshiitem">政府信息公开意见箱</a>
+	                    <a href="#" class="banshiitem">政府信息公开制度文件</a>
+	                </div>
+	            </div>
+	            <div class="newscontent-right">
+	                <div class="newscontent-box">
+	                    <img src="__PUBLIC__/images/huiyi.gif">
+	                    <ul class="newslist">
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队医疗队队医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                    </ul>
+	                </div>
+	                <div class="newscontent-box">
+	                    <img src="__PUBLIC__/images/huiyi.gif">
+	                    <ul class="newslist">
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                    </ul>
+	                </div>
+	                <div class="newscontent-box">
+	                    <img src="__PUBLIC__/images/huiyi.gif">
+	                    <ul class="newslist">
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                        <li><a href="#"><span>[妇幼健康]</span>朱小丹省长率团赴藏慰问省园医疗队</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="rightbox">
+	        <div class="zhengfumulu red"><h3>便民查询</h3></div>
+	        <div class="bianminchaxun">
+	            <a href="#"><img src="__PUBLIC__/images/jiuyizhinan1.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiuyizhinan2.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiuyizhinan3.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiuyizhinan4.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiuyizhinan5.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/jiuyizhinan6.gif"></a>
+	            <a href="#"><img src="__PUBLIC__/images/wenti.gif"></a>
+	        </div>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	
+	<div class="main-container newsbox">
+	    <hr class="bluehr">
+	    <h3 class="zhengwu"></h3>
+	    <div class="leftbox">
+	        <div class="zhuantilist">
+	            <a href="#"><img src="__PUBLIC__/images/gaige.gif" class="gaige"></a>
+	            <a href="#"><img src="__PUBLIC__/images/daiyun.gif" class="daiyun"></a>
+	            <a href="#"><img src="__PUBLIC__/images/chuanqiu.gif" class="chuanqiu"></a>
+	            <a href="#"><img src="__PUBLIC__/images/xinxigongkai.gif" class="xinxigongkai"></a>
+	            <a href="#"><img src="__PUBLIC__/images/chenji.gif" class="chenji"></a>
+	        </div>
+	    </div>
+	    <div class="rightbox zhengwuright">
+	        <a href="#"><img src="__PUBLIC__/images/right_xia1.gif"></a>
+	        <a href="#"><img src="__PUBLIC__/images/right_xia2.gif"></a>
+	        <a href="#"><img src="__PUBLIC__/images/right_xia3.gif"></a>
+	        <a href="#"><img src="__PUBLIC__/images/right_xia4.gif"></a>
+	        <a href="#"><img src="__PUBLIC__/images/right_xia5.gif"></a>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	
+	<div class="main-container newsbox erweima">
+	    <img src="__PUBLIC__/images/saomiao.gif">
+	    <img src="__PUBLIC__/images/saomiao1.gif">
+	    <img src="__PUBLIC__/images/saomiao1.gif">
+	</div>
+	
+
+
+</block>
+
+<block name="script">
+	<script>
+	   
+	     
+	</script>
+</block>

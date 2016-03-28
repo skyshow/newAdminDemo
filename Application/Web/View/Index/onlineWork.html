@@ -1,0 +1,81 @@
+<extend name="template/template" />
+
+<block name="css">
+</block>
+
+<block name="content">
+
+    <div class=""></div>
+    <div class="main-container">
+        <div class="wangshang-left ">
+            <div class="branks"><a href="#">首页</a> > <a href="#">网上办事</a></div>
+            <div class="banshi-container">
+                <a href="#"><img src="__PUBLIC__/images/banshi1.png"></a>
+                <a href="#"><img src="__PUBLIC__/images/bgxiazai.png"></a>
+                <a href="http://xf.gdwst.gov.cn/"><img src="__PUBLIC__/images/webfind.png"></a>
+                <a href="http://wsbs.gdwst.gov.cn/netapp/"><img src="__PUBLIC__/images/websqing1.png"></a>
+                <a href="#"><img src="__PUBLIC__/images/webzisun1.png"></a>
+            </div>
+            <div class="zhengwuhead">
+                <span>办事指南</span>
+                <a href="#" class="morebanshi">更多></a>
+            </div>
+            <ul class="catelistinfo" style="margin-top: 5px;">
+                <volist name="banshi" id="info">
+                    <li><a href="#">{$info['title']}<span class="catetime">{$info['addtime']}</span></a></li>
+                </volist>
+            </ul>
+
+            <div style="margin-top: 50px;"></div>
+            <div class="zhengwuhead">
+                <span>表格下载</span>
+                <a href="#" class="morebanshi">更多></a>
+            </div>
+            <ul class="catelistinfo" style="margin-top: 5px;">
+                <volist name="biaoge" id="info">
+                    <li><a href="#">{$info['title']}<span class="catetime">{$info['addtime']}</span></a></li>
+                </volist>
+            </ul>
+        </div>
+        <div class="wangshang-right">
+            <div class="banshi-block flex flex-align-center">
+                <div class="banshi-block-left">
+                    <span>投诉监督电话</span>
+                </div>
+                <div class="tousu flex-1">
+                    <p>医疗纠纷投诉电话：020-83710724</p>
+                    <p>收费投诉电话：020-83821470</p>
+                    <p>卫生监督投诉电话：020-84469333</p>
+                </div>
+            </div>
+
+            <div class="banshi-block flex flex-align-center">
+                <div class="banshi-block-left">
+                    <span>电子邮件订阅</span>
+                </div>
+                <div class="tousu flex-1">
+                    <p>请输入您的电子邮箱地址</p>
+                    <p><input type="text"></p>
+                    <p><button class="tousubtn">订阅</button><button class="tousubtn">取消订阅</button></p>
+                </div>
+            </div>
+
+            <div class="banshi-block flex flex-align-center">
+                <div class="banshi-block-left">
+                    <span  style="padding-top: 25px;">数据查询</span>
+                </div>
+                <div class="tousu flex-1">
+                    <a href="#" class="link">广东省医学科研基金立项课题查询</a>
+                    <a href="#" class="link">医疗服务价格查询</a>
+                    <a href="#" class="link">医师资格证书查询</a>
+                    <a href="#" class="link">成绩查询</a>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <div style="margin-top: 80px;"></div>
+</block>
+

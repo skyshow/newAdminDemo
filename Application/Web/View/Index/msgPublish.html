@@ -1,0 +1,67 @@
+<extend name="template/template" />
+
+<block name="css">
+</block>
+
+
+<block name="content">
+
+
+    <div class=""></div>
+    <div class="main-container">
+        <div class="wangshang-left ">
+            <div class="branks"><a href="#">首页</a> > <a href="#">政务公开</a></div>
+            <div class="xinxi-container">
+                <volist name="list" id="info">
+                    <a class="xinxiitem" href="#">
+                        <h3 class="xinxi-title">{$info['title']}</h3>
+                        <p class="xinxi-content">{$info['subcontent']}</p>
+                        <p class="xinxiitem-more">来源：{$info['source']} 发布时间：{$info['addtime']}</p>
+                    </a>
+                </volist>
+
+                <div class="morepage">{$page}</div>
+            </div>
+
+        </div>
+        <div class="wangshang-right">
+            <div class="zhengwuhead">
+                <span>图片新闻</span>
+            </div>
+            <div class="tupianxinwen">
+                <a href="#" class="new-item">
+                    <img src="__PUBLIC__/images/huiyi.gif">
+                    <p>我省正式启动中医医疗资源与服务统计调查工作</p>
+                </a>
+                <a href="#" class="new-item">
+                    <img src="__PUBLIC__/images/huiyi.gif">
+                    <p>我省正式启动中医医疗资源与服务统计调查工作</p>
+                </a>
+                <a href="#" class="new-item">
+                    <img src="__PUBLIC__/images/huiyi.gif">
+                    <p>我省正式启动中医医疗资源与服务统计调查工作</p>
+                </a>
+                <a href="#" class="new-item">
+                    <img src="__PUBLIC__/images/huiyi.gif">
+                    <p>我省正式启动中医医疗资源与服务统计调查工作</p>
+                </a>
+            </div>
+
+            <div class="zhengwuhead" style="margin-top: 20px;">
+                <span>点击排行榜</span>
+            </div>
+            <ul class="dianjipaihang">
+                <volist name="hitlist" id="hitinfo">
+                    <li><a href="#">{$hitinfo['title']}</a></li>
+                </volist>
+            </ul>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <div style="margin-top: 80px;"></div>
+
+</block>
+

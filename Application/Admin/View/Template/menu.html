@@ -1,0 +1,46 @@
+		<div class="page-container">
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        
+                        <volist name="menu_data" id="vo">
+                        
+	                        <li class="nav-item  <if condition='$vo.isSelect eq 1'>active</if>">
+	                        	
+	                            <a href="<if condition='$vo.isParent eq 1'>javascript:;<else />{$vo.url}</if>" class="nav-link nav-toggle">
+	                                <i class="icon-home"></i>
+	                                <span class="title">{$vo.name}</span>	                          
+	                                <span class="arrow"></span>
+	                            </a>
+	                            
+	                            <ul class="sub-menu">
+	                            
+	                            	<volist name="vo.items" id="vq">
+		                                <li class="nav-item <if condition='$vq.isSelect eq 1'>active</if>">
+		                                
+		                                    <a href="<if condition='$vq.isParent eq 1'>javascript:;<else />{$vq.url}</if>" class="nav-link nav-toggle">
+		                                        <i class="icon-bar-chart"></i>
+		                                        <span class="title">{$vq.name}</span>
+		                                    </a>
+		                                    
+		                                    <ul class="sub-menu">
+		                                    	<volist name="vq.items" id="vk">
+	                                                <li class="nav-item <if condition='$vk.isSelect eq 1'>active</if>">
+	                                                    <a href="<if condition='$vk.isParent eq 1'>javascript:;<else />{$vk.url}</if>" class="nav-link">
+	                                                    <i class="icon-power"></i>{$vk.name}</a>
+	                                                </li>
+                                                </volist> 
+                                           	</ul>
+                                           	
+		                                </li> 
+	                                </volist> 
+	                                                              
+	                            </ul>
+	                            
+	                        </li> 
+	                        
+	                    </volist>
+
+                    </ul>
+                </div>
+            </div>
