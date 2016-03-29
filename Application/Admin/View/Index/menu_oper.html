@@ -1,0 +1,165 @@
+
+<extend name="Template/template" />
+
+<block name="css">
+</block>
+
+<block name="content">
+
+	<div class="portlet light">
+	    <div class="portlet-title">
+	        <div class="caption">
+	            <i class="icon-settings font-dark"></i>
+	            <span class="caption-subject font-dark sbold uppercase">{$headline}</span>
+	        </div>
+	        <div class="actions">
+	            <a href="javascript:history.back()">
+	            	<button type="button" class="btn btn-success">&nbsp;返&nbsp;回&nbsp;</button>
+				</a> 
+	        </div>
+	    </div>
+	    
+	    <div class="portlet-body form">
+	        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="javascript:;">
+	            <div class="form-body">
+	            
+	            	<div class="form-group">
+	                    <label class="col-md-3 control-label">上级</label>
+	                    <div class="col-md-6">
+	                        <select class="form-control" name="parentid">
+	                            <option value='0'>作为一级菜单</option>
+								{$select_categorys}
+	                        </select>
+	                    </div>
+	                </div>
+	            
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">名称</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control required" placeholder="名称" name="name" value="{$info.name}" >
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">项目</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control required" name="app" value="{$info.app}" placeholder="项目" >
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">模块</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control required" name="model" value="{$info.model}" placeholder="模块" >
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">方法</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control required" name="action" value="{$info.action}" placeholder="方法" >
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">参数</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control" name="data" value="{$info.data}" placeholder="例:g=admin&m=menu&a=add；外部链接以http://开头" >
+	                    </div>
+	                </div>
+	                
+	                 <div class="form-group">
+	                    <label class="col-md-3 control-label">图标</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control" name="icon" value="{$info.icon}" placeholder="图标" >
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+                        <label class="col-md-3 control-label">备注</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" rows="3" name="remark">{$info.remark}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+	                    <label class="col-md-3 control-label">状态</label>
+	                    <div class="col-md-6">
+	                        <select class="form-control" name="status">
+	                            <if condition="$info.status eq 1">
+									<option value='1' selected >显示</option>
+									<option value='0' >不显示</option>
+								<else />
+									<option value='1' >显示</option>
+									<option value='0' selected>不显示</option>
+								</if>	
+	                        </select>
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">类型</label>
+	                    <div class="col-md-2">
+	                        <select class="form-control" name="type">
+	                           <if condition="$info.type eq 1">
+									<option value='1' selected >权限认证+菜单</option>
+									<option value='0' >只作为菜单</option>
+									<option value='2'>操作</option>
+								<elseif condition="$info.type eq 2" />
+									<option value='1' >权限认证+菜单</option>
+									<option value='0' >只作为菜单</option>
+									<option value='2' selected>操作</option>
+								<else />
+									<option value='1' >权限认证+菜单</option>
+									<option value='0' selected>只作为菜单</option>
+									<option value='2'>操作</option>
+								</if>	
+	                        </select>
+	                    </div>
+	                    <span class="help-inline"> &nbsp;&nbsp;注意：“权限认证+菜单”表示加入后台权限管理，纯碎是菜单项请不要选择此项。 </span>
+	                </div>
+	                
+	                <input type="hidden" name="id" value="{$info.id}" />
+	                
+	            </div>
+	            <div class="form-actions">
+	                <div class="row">
+	                    <div class="col-md-offset-3 col-md-9">
+	                        <button type="submit" class="btn green" id="tijiao">提交</button>
+	                        <a href="javascript:history.back()">
+	                        	<button type="button" class="btn default">取消</button>
+	                        </a>
+	                    </div>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+
+</block>
+
+<block name="script">
+
+<script type="text/javascript">
+
+jQuery(function($) {
+	$(document).ready(function() {
+		$("form").validate({
+		   submitHandler: function(form) 
+		   {      
+			   var data = $("form").serialize();
+				$.post("{$jump_url}", data, 
+				  function(data){
+					alert(data.info);
+		            if (data.status == 1) {
+		                window.location.href = data.url;
+		            } 
+		        },'json');   
+		   } 
+		});
+	});
+});
+</script>
+
+</block>
+

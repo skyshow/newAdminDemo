@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Metronic | User Login 2</title>
+        <title>{:C('FULL_COMPANY_NAME')}</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -34,6 +34,8 @@
         
         <style type="text/css">
 			.code{cursor:pointer;height:40px;width:300px;}
+			.title{font-size:16px;font-weight:bold;}
+			.fa-leaf{color:green;}
 		</style>
     </head>
     <!-- END HEAD -->
@@ -42,8 +44,10 @@
 
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <a href="index.html">
-                <img src="__PUBLIC__/assets/pages/img/logo-big-white.png" style="height: 17px;" alt="" /> </a>
+               <span class="title">
+               		<i class="fa fa-leaf"></i>{:C('FULL_COMPANY_NAME')}
+               </span>
+               <br /><br />后台管理系统
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
@@ -131,6 +135,13 @@
 		                }				
 	              },'json'); 
 			})
+			
+			$(document).keydown(function(e){
+				if(e.keyCode == 13) {
+					e.preventDefault(); 
+					$('.h_login').click();
+				}
+			});
 		
 		</script>
     </body>

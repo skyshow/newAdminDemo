@@ -8,7 +8,7 @@
 	                        <li class="nav-item  <if condition='$vo.isSelect eq 1'>active</if>">
 	                        	
 	                            <a href="<if condition='$vo.isParent eq 1'>javascript:;<else />{$vo.url}</if>" class="nav-link nav-toggle">
-	                                <i class="icon-home"></i>
+	                                <i class="fa fa-{$vo.icon}"></i>
 	                                <span class="title">{$vo.name}</span>	                          
 	                                <span class="arrow"></span>
 	                            </a>
@@ -19,7 +19,7 @@
 		                                <li class="nav-item <if condition='$vq.isSelect eq 1'>active</if>">
 		                                
 		                                    <a href="<if condition='$vq.isParent eq 1'>javascript:;<else />{$vq.url}</if>" class="nav-link nav-toggle">
-		                                        <i class="icon-bar-chart"></i>
+		                                        <i class="fa fa-{$vq.icon}"></i>
 		                                        <span class="title">{$vq.name}</span>
 		                                    </a>
 		                                    
@@ -27,7 +27,7 @@
 		                                    	<volist name="vq.items" id="vk">
 	                                                <li class="nav-item <if condition='$vk.isSelect eq 1'>active</if>">
 	                                                    <a href="<if condition='$vk.isParent eq 1'>javascript:;<else />{$vk.url}</if>" class="nav-link">
-	                                                    <i class="icon-power"></i>{$vk.name}</a>
+	                                                    <i class="fa fa-{$vk.icon}"></i>{$vk.name}</a>
 	                                                </li>
                                                 </volist> 
                                            	</ul>

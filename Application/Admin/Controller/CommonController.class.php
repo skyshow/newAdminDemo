@@ -20,7 +20,6 @@ class CommonController extends Controller {
 	protected $_account       = array();
 	protected $_page          = 1;
 	protected $_pagesize      = 10;
-	protected $_start_runtime = 0;
 	
     //初始化
     public function _initialize() {
@@ -49,7 +48,6 @@ class CommonController extends Controller {
     			$operation = D('Access')->getRoleOperationAuth($this->_account['role_id']);
     			if($operation) $this->assign('operation',$operation);
     	
-    			$this->_start_runtime = getMillisecond();
     		}
     	}else{  
     		 	
