@@ -1,0 +1,106 @@
+
+
+
+<extend name="Template/template" />
+
+<block name="css">
+</block>
+
+<block name="content">
+
+
+<div class="portlet light">
+	    <div class="portlet-title">
+	        <div class="caption">
+	            <i class="icon-settings font-dark"></i>
+	            <span class="caption-subject font-dark sbold uppercase">{$headline}</span>
+	        </div>
+	        <div class="actions">
+	            <a href="javascript:history.back()">
+	            	<button type="button" class="btn btn-success">&nbsp;返&nbsp;回&nbsp;</button>
+				</a> 
+	        </div>
+	    </div>
+	    
+	    <div class="portlet-body form">
+	        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="javascript:;">
+	            <div class="form-body">
+	            
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">用户名</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control required" placeholder="用户名" name="account" value="{$info.account}" >
+	                    </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                    <label class="col-md-3 control-label">密码</label>
+	                    <div class="col-md-6">
+	                    	<if condition="$info.account eq ''">
+	                        	<input type="text" class="form-control required" name="password" value="" placeholder="密码" >
+	                        <else />
+	                        	<input type="text" class="form-control required" name="password" value="" placeholder="留空则为不修改" >
+	                        	<input type="hidden" name="uid" value="{$info.uid}" />
+	                        </if>
+	                    </div>
+	                </div>
+	                
+                    <div class="form-group">
+	                    <label class="col-md-3 control-label">角色</label>
+	                    <div class="col-md-6">
+	                        <select class="form-control" name="role_id">
+	                            <volist name="role_list" id="vo">
+									<if condition="$vo.current eq 1">
+				 						<option value="{$vo.id}" selected="selected" >{$vo.name}</option>
+				 					<else />
+				 						<option value="{$vo.id}">{$vo.name}{$info.current}</option>
+				 					</if>
+			 					</volist> 
+	                        </select>
+	                    </div>
+	                </div>
+	               
+	            </div>
+	            <div class="form-actions">
+	                <div class="row">
+	                    <div class="col-md-offset-3 col-md-9">
+	                        <button type="submit" class="btn green" id="tijiao">提交</button>
+	                        <a href="javascript:history.back()">
+	                        	<button type="button" class="btn default">取消</button>
+	                        </a>
+	                    </div>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+
+</block>
+
+
+<block name="script">
+
+<script type="text/javascript">
+
+jQuery(function($) {	
+	$().ready(function() {
+		$("form").validate({
+		   submitHandler: function(form) 
+		   {      
+			   var data = $("form").serialize();
+				$.post("{$jump_url}", data, 
+				  function(data){
+					alert(data.info);
+		            if (data.status == 1) {
+		                window.location.href = data.url;
+		            } 
+		        },'json');   
+		   } 
+		});
+	});
+});
+</script>
+
+</block>
+
+

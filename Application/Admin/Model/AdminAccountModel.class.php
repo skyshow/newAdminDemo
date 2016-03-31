@@ -79,7 +79,7 @@ class AdminAccountModel extends Model {
 	}
 	
 	public function get_all_account(){
-		$res = $this->field('uid, account,status, adduid, lastlogin, loginip, role_id, provider_id')->select();
+		$res = $this->field('uid, account,status, adduid, lastlogin, loginip, role_id')->select();
 		foreach($res AS $k => $v){
 			if($v['adduid']){
 				$res[$k]['add_account'] = $this->where(array('uid' => $v['adduid']))->getField('account');
@@ -87,15 +87,9 @@ class AdminAccountModel extends Model {
 				$res[$k]['add_account'] = '系统';
 			}
 			if($v['role_id']){
-				$res[$k]['role_name'] = D('Role')->where(array('id' => $v['role_id']))->getField('name');
+				$res[$k]['role_name'] = D('AdminRole')->where(array('id' => $v['role_id']))->getField('name');
 			}
 
-			if (!empty($v['provider_id'])) {
-				$providerData = D("Provider")->getOneData($v['provider_id']);
-				$res[$k]['provider_name'] = $providerData['name'];  // 供应商简称
-			}else{
-				$res[$k]['provider_name'] = "";
-			}
 		}
 		return $res;
 	}

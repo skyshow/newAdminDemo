@@ -214,6 +214,205 @@ class IndexController extends CommonController {
     	}
     }
     
+    /**
+     * 后台用户管理
+     */
+    public function user(){
+
+    	$list = D('AdminAccount')->get_all_account();
+    	$this->assign('list', $list);
+    	
+    	$this->display();
+    	
+    }
+    
+    public function account_add(){
+    	
+    	if (IS_POST) {
+    		$data = D("AdminAccount")->create();
+    		if ($data) {
+    			$data['adduid'] = $this->_account['uid'];
+    			$data['username'] = $data['account'];
+    			$insert_id = D("AdminAccount")->add($data);
+    			if ($insert_id !== false) {
+    				$this->success("添加成功", U("Index/user"));
+    			} else {
+    				$this->error("添加失败！", U("Index/user"));
+    			}
+    		} else {
+    			$this->error(D("AdminAccount")->getError());
+    		}
+    	} else {
+    		$role_list = D('AdminRole')->simple_role_list();
+    
+    		$this->assign("headline", "新增管理员");
+    		$this->assign("role_list", $role_list);
+    		$this->assign("jump_url", U('Admin/Index/'.ACTION_NAME));
+    		$this->display("Index:account_oper");
+    	}
+    }
+    
+    /**
+     * 编辑管理员
+     */
+    public function account_edit(){
+    	
+    	if (IS_POST) {
+    		$id = intval(I("post.uid"));
+    		if (empty($_POST['password'])) {
+    			unset($_POST['password']);
+    		}
+    		$data = D("AdminAccount")->create();
+    		if ($data) {
+    			if (empty($data['password'])) unset($data['password']);
+    			if (D("AdminAccount")->save($data) !== false) {
+    				
+    				$this->success("修改成功！", U('Index/user'));
+    			} else {
+    				$this->error("修改失败！" . D("AdminAccount")->getlastsql() . print_r($data, true));
+    			}
+    		} else {
+    			$this->error(D("AdminAccount")->getError());
+    		}
+    	} else {
+    		$uid = intval(I("get.uid"));
+    		if (!$uid) {
+    			$this->error("非法操作！");
+    		}
+    		$role_id = D('AdminAccount')->where(array('uid' => $uid))->getField('role_id');
+    		if ($role_id == 1) {
+    			$this->error("超级管理员不能编辑！", U('Index/user'));
+    		}
+    		$data = D("AdminAccount")->field('uid, account, role_id')->where(array("uid" => $uid))->find();
+    		if (!$data) {
+    			$this->error("编辑项不存在！");
+    		}
+    		
+    		$role_list = D('AdminRole')->simple_role_list($data['role_id']);
+    		$this->assign("headline", "编辑管理员");
+    		$this->assign("role_list", $role_list);
+    		$this->assign("jump_url", U('Admin/Index/'.ACTION_NAME));
+    		$this->assign("info", $data);
+    		$this->display("Index:account_oper");
+    	}
+    }
+    
+    /**
+     * 删除
+     */
+    public function del_account(){
+    	
+    	$id = I("post.uid");
+    	if (!$id) {
+    		$this->error("删除项不存在！", U('Index/user'));
+    	}
+    	$role_id = D('AdminAccount')->where(array('uid' => $id))->getField('role_id');
+    	if ($role_id == 1) {
+    		$this->error("超级管理员不能删除！", U('Index/user'));
+    	}
+    	$status = D("AdminAccount")->delete($id);
+    	if ($status !== false) {
+    		$this->success("删除成功！", U('Index/user'));
+    	} else {
+    		$this->error("删除失败！", U('Index/user'));
+    	}
+    }
+    
+    /**
+     * 角色管理
+     */
+    public function role(){
+    	
+    	$data = D("AdminRole")->get_role_list();
+    	$this->assign("list", $data);
+
+    	$this->display();
+    	
+    }
+    
+    /**
+     * 添加角色
+     */
+    public function role_add() {
+    	if (IS_POST) {
+    		if (D("AdminRole")->create()) {
+    			$id = D("AdminRole")->add();
+    			if ($id) {
+    				$this->success("添加角色成功",U("Index/role"));
+    			} else {
+    				$this->error("添加失败！",U("Index/role"));
+    			}
+    		} else {
+    			$this->error(D("AdminRole")->getError());
+    		}
+    	} else {
+    
+    		$this->assign("headline", "新增角色");
+    		$this->assign("jump_url", U('Admin/Index/'.ACTION_NAME));
+    		$this->display("Index:role_oper");
+    	}
+    }
+    
+    /**
+     * 删除角色 角色只能单个删除
+     */
+    public function del_role() {
+    	$id = intval(I("post.id"));
+    	if ($id == 1) {
+    		$this->error("超级管理员角色不能被删除！");
+    	}
+    	$count = D('AdminAccount')->where(array('role_id' => $id))->count();
+    	if($count){
+    		$this->error("该角色已经有用户！");
+    	}else{
+    		$status = D("AdminRole")->delete($id);
+    		if ($status !== false) {
+    			$this->success("删除成功！", U('Index/role'));
+    		} else {
+    			$this->error("删除失败！");
+    		}
+    	}
+    }
+    
+    /**
+     * 编辑角色
+     */
+    public function role_edit() {
+    	if (IS_POST) {
+    		$id = intval(I("post.id"));
+    		if ($id == 1) {
+    			$this->error("超级管理员角色不能被修改！");
+    		}
+    		$data = D("AdminRole")->create();
+    		if ($data) {
+    			if (D("AdminRole")->save($data)!== false) {
+    				$this->success("修改成功！", U('Index/role'));
+    			} else {
+    				$this->error("修改失败！".D("AdminRole")->getlastsql().print_r($data, true));
+    			}
+    		} else {
+    			$this->error(D("AdminRole")->getError());
+    		}
+    	}else{
+    		$id = intval(I("get.id"));
+    		if (!$id) {
+    			$this->error("非法操作！");
+    		}
+    		if ($id == 1) {
+    			$this->error("超级管理员角色不能被修改！");
+    		}
+    		$data = D("AdminRole")->field('id, status, remark, name')->where(array("id" => $id))->find();
+    		if (!$data) {
+    			$this->error("该角色不存在！");
+    		}
+    
+    		$this->assign("headline", "编辑角色");
+    		$this->assign("jump_url", U('Admin/Index/'.ACTION_NAME));
+    		$this->assign("info",  $data);
+    		$this->display("Index:role_oper");
+    	}
+    }
+    
    
     
     
