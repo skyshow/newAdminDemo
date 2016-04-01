@@ -45,19 +45,20 @@
 								<td><if condition="$vo.status eq 1">启用<else />禁止</if></td>
 								<td>
 									<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">							
+										<if condition="$vo.id neq 1">
 										
-										<a class='btn btn-outline btn-circle green btn-sm purple' href='{:U("Admin/Index/role_edit")}?id={$vo.id}' title='编辑'>
-											<i class='fa fa-edit'>编辑</i>
-										</a>
-																
-										<a class='btn btn-outline btn-circle dark btn-sm red' href='javascript:;' onclick='remove_option({$vo.id}, "您确认要删除这条数据吗?")' title='删除'>
-											<i class='fa fa-trash-o'>删除</i>
-										</a>
+											<a class='btn btn-outline btn-circle green btn-sm purple' href='{:U("Admin/Index/role_edit")}?id={$vo.id}' title='编辑'>
+												<i class='fa fa-edit'>编辑</i>
+											</a>
+																	
+											<a class='btn btn-outline btn-circle dark btn-sm red' href='javascript:;' onclick='remove_option({$vo.id}, "您确认要删除这条数据吗?")' title='删除'>
+												<i class='fa fa-trash-o'>删除</i>
+											</a>
 										
-										<a class='btn btn-outline btn-circle dark btn-sm blue' href="{:U('Admin/Rbac/authorize')}?id={$vo.id}" title='权限设置'>
-											<i class='fa fa-asterisk'>权限设置</i>
-										</a>
-																		
+											<a class='btn btn-outline btn-circle dark btn-sm blue' href="{:U('Admin/Index/authorize')}?id={$vo.id}" title='权限设置'>
+												<i class='fa fa-asterisk'>权限设置</i>
+											</a>
+										</if>							
 									</div>
 								</td>
 							</tr>

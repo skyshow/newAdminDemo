@@ -97,7 +97,7 @@ class AdminMenuModel extends Model {
 		}
 		$array = array();
 		//实例化权限表
-		$privdb = D("Access");
+		$privdb = D("AdminRoleMenu");
 		foreach ($result as $v) {
 			 
 			//方法
@@ -109,15 +109,11 @@ class AdminMenuModel extends Model {
 			} else {
 				 
 				if (preg_match('/^ajax_([a-z]+)_/', $action, $_match)){
-					 
 					$action = $_match[1];
 				}
 				 
-				$r = $privdb->where(array('g' => $v['app'], 'm' => $v['model'], 'a' => $action, 'role_id' => session()['user']["role_id"]))->find();
-				 
-				if ($r){
-					$array[] = $v;
-				}
+				$r = $privdb->where(array('menu_id' => $v['id'],'role_id' => session()['user']["role_id"]))->find();
+				if ($r) $array[] = $v;
 				 
 			}
 		}
@@ -142,9 +138,8 @@ class AdminMenuModel extends Model {
 	 */
 	public function menu_json() {
 		
-		$data = $this->get_tree(0);
+		return $this->get_tree(0);
 	
-		return $data;
 	}
 	
 	//取得树形结构的菜单

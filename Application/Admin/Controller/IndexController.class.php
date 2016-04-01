@@ -413,6 +413,101 @@ class IndexController extends CommonController {
     	}
     }
     
+    
+    /**
+     * 角色授权
+     */
+    public function authorize() {
+    	//角色ID
+    	if (IS_POST) {
+    		$roleid = intval(I("post.roleid"));
+    		if(!$roleid){
+    			$this->error("需要授权的角色不存在！");
+    		}
+    		if (is_array($_POST['menuid']) && count($_POST['menuid'])>0) {
+
+    			C('TOKEN_ON', false);
+    			$addauthorize = array();
+    			//检测数据合法性
+    			foreach ($_POST['menuid'] as $menuid) { 				
+    				$info['role_id'] = $roleid;
+    				$info['menu_id'] = $menuid;
+    				$info['ctime']   = time();
+    				$data = D('AdminRoleMenu')->create($info);
+    				if (!$data) {
+    					$this->error(D('AdminRoleMenu')->getError());
+    				} else {
+    					$addauthorize[] = $data;
+    				}
+    			}
+    			
+    			C('TOKEN_ON', true);
+    			if(!$roleid || !$addauthorize || !is_array($addauthorize)){
+    				$this->error("授权失败！");
+    			}
+    			//删除旧的权限
+    			D('AdminRoleMenu')->where(array("role_id" => $roleid))->delete();
+    			$res = D('AdminRoleMenu')->addAll($addauthorize);
+    			if($res){
+    				$this->success("授权成功！", U("Index/role"));
+    			}else{
+    				$this->error("授权失败！");
+    			}
+    		}else{
+    			//当没有数据时，清除当前角色授权
+    			D('AdminRoleMenu')->where(array("role_id" => $roleid))->delete();
+    			$this->error("没有接收到数据，执行清除授权成功！");
+    		}
+    	}else{
+    		$roleid = intval(I("get.id"));
+    		if (!$roleid) {
+    			$this->error("参数错误！");
+    		}
+    		$menu = new p\Tree();
+    		$menu->icon = array('│ ', '├─ ', '└─ ');
+    		$menu->nbsp = '&nbsp;';
+    		$result = D('AdminMenu')->order(array("listorder" => "ASC"))->select();
+
+    		$newmenus = array();
+    		$priv_data = D('AdminRoleMenu')->where(array("role_id" => $roleid))->getField('menu_id',true); //获取权限表数据
+    		
+    		foreach ($result as $m){
+    			$newmenus[$m['id']]=$m;
+    		}
+    	
+    		foreach ($result as $n => $t) {
+    			$result[$n]['checked'] = in_array($t['id'],$priv_data) ? ' checked' : '';
+    			$result[$n]['level'] = $this->_get_level($t['id'], $newmenus);
+    			$result[$n]['parentid_node'] = ($t['parentid']) ? ' class="child-of-node-' . $t['parentid'] . '"' : '';
+    		}
+    		$str = "<tr id='node-\$id' \$parentid_node>
+                       <td style='padding-left:30px;'>\$spacer<input type='checkbox' name='menuid[]' value='\$id' level='\$level' \$checked onclick='javascript:checknode(this);'> \$name</td>
+	    			</tr>";
+    		$menu->init($result);
+    		$categorys = $menu->get_tree(0, $str);
+    		$this->assign("categorys", $categorys);
+    		$this->assign("roleid", $roleid);
+    		$this->display();
+    	}
+    }
+    
+    /**
+     * 获取菜单深度
+     * @param $id
+     * @param $array
+     * @param $i
+     */
+    protected function _get_level($id, $array = array(), $i = 0) {
+    
+    	if ($array[$id]['parentid']==0 || empty($array[$array[$id]['parentid']]) || $array[$id]['parentid']==$id){
+    		return  $i;
+    	}else{
+    		$i++;
+    		return $this->_get_level($array[$id]['parentid'],$array,$i);
+    	}
+    
+    }
+    
    
     
     
